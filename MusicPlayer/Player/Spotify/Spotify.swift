@@ -188,7 +188,8 @@ class Spotify {
 func getKeyFromAnalysis(_ anal: AudioAnalysis) -> String {
     let key = getKey(anal.track.key)
     let mode = anal.track.mode == 0 ? "m" : ""
-    return "\(key)\(mode)"
+    let confidence = String(format: "%.0f%%", 100 * anal.track.key_confidence)
+    return "\(key)\(mode) \(confidence)"
 }
 
 func getKey(_ key: Int) -> String {
