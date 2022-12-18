@@ -8,6 +8,11 @@
 import Foundation
 import ScriptingBridge
 
+struct Secrets: Codable {
+    let client_id: String
+    let client_secret: String
+}
+
 class Spotify {
     
     var spotifyPlayer: SpotifyApplication
@@ -16,8 +21,7 @@ class Spotify {
     
     weak var delegate: MusicPlayerDelegate?
     
-    let SpotifyClientId = "<CLIENT ID>"
-    let SpotifyClientSecret = "<CLIENT SECRET>"
+    var spotifySecrets: Secrets?
     var apiKeyExpires: Date?
     var apiKey: String?
     
@@ -29,11 +33,22 @@ class Spotify {
         guard let player = SBApplication(bundleIdentifier: MusicPlayerName.spotify.bundleID) else { return nil }
         spotifyPlayer = player
         hashValue = Int(arc4random())
+        loadSecrets()
         getApiKey()
     }
     
     deinit {
         stopPlayerTracking()
+    }
+    
+    func loadSecrets() {
+        let url = Bundle.main.url(forResource: "secrets", withExtension: "json")!
+        do {
+            let data = try Data(contentsOf: url)
+            spotifySecrets = try JSONDecoder().decode(Secrets.self, from: data)
+        } catch {
+            print("Failed to decode Secrets: \(error)")
+        }
     }
     
     func isApiKeyExpired() -> Bool {
@@ -50,7 +65,7 @@ class Spotify {
         var request = URLRequest(url: url!)
         request.httpMethod = "POST"
 
-        let authorizationHeader = "\(SpotifyClientId):\(SpotifyClientSecret)".data(using: .utf8)?.base64EncodedString() ?? ""
+        let authorizationHeader = "\(spotifySecrets!.client_id):\(spotifySecrets!.client_secret)".data(using: .utf8)?.base64EncodedString() ?? ""
         request.setValue("Basic \(authorizationHeader)", forHTTPHeaderField: "Authorization")
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.httpBody = "grant_type=client_credentials".data(using: .utf8)

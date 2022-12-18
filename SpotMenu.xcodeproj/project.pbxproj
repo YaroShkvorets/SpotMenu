@@ -79,6 +79,7 @@
 		64F112A821933CA400753E83 /* ScrollingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F112A621933ACB00753E83 /* ScrollingTextView.swift */; };
 		64F29A091F2E5F1100E48BBD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 64F29A0B1F2E5F1100E48BBD /* Localizable.strings */; };
 		98C18916984B50AAD9E17661 /* Pods_SpotMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADFCF0607F980ADD8D5D03FA /* Pods_SpotMenu.framework */; };
+		B0AC1607294EEA1300978A73 /* secrets.json in Resources */ = {isa = PBXBuildFile; fileRef = B0AC1606294EEA1300978A73 /* secrets.json */; };
 		DB2C500E2199F94000932042 /* ScrollingStatusItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2C500D2199F94000932042 /* ScrollingStatusItemView.swift */; };
 		E2D35CCB1F60827B00EB5D67 /* CustomVisualEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648984831E5C21C200EA2234 /* CustomVisualEffect.swift */; };
 		E2D35CCE1F60879700EB5D67 /* NSViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D35CCD1F60879700EB5D67 /* NSViewExtension.swift */; };
@@ -218,6 +219,7 @@
 		64F29A0F1F2E5FDD00E48BBD /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6A999C2F782EFDE0675BE9DB /* Pods-SpotMenu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotMenu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SpotMenu/Pods-SpotMenu.debug.xcconfig"; sourceTree = "<group>"; };
 		ADFCF0607F980ADD8D5D03FA /* Pods_SpotMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpotMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0AC1606294EEA1300978A73 /* secrets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = secrets.json; sourceTree = "<group>"; };
 		DB2C500D2199F94000932042 /* ScrollingStatusItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingStatusItemView.swift; sourceTree = "<group>"; };
 		E2D35CCD1F60879700EB5D67 /* NSViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSViewExtension.swift; sourceTree = "<group>"; };
 		E2D35CD21F60A1DC00EB5D67 /* PopOverViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopOverViewControllerExtension.swift; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 		2133241F1D79801E0060D48C = {
 			isa = PBXGroup;
 			children = (
+				B0AC1606294EEA1300978A73 /* secrets.json */,
 				2133242A1D79801E0060D48C /* SpotMenu */,
 				64185C0F1F1B8DC400CA23A0 /* SpotMenuToday */,
 				64D5BE551FDC714900AE5C99 /* MusicPlayer */,
@@ -754,6 +757,7 @@
 				641226E81FD417D700BB119F /* UpdatePreferences.storyboard in Resources */,
 				6437466B1F76B0BB00B16214 /* Preferences.storyboard in Resources */,
 				6486C08D1F5C0B4500CC5245 /* dsa_pub.pem in Resources */,
+				B0AC1607294EEA1300978A73 /* secrets.json in Resources */,
 				64F29A091F2E5F1100E48BBD /* Localizable.strings in Resources */,
 				2133242E1D79801E0060D48C /* Assets.xcassets in Resources */,
 			);
