@@ -126,7 +126,7 @@ final class PopOverViewController: NSViewController {
                 artistLabel.stringValue = NSLocalizedString("Artist", comment: "")
             }
 
-            titleLabel.stringValue = track.title
+            titleLabel.stringValue = track.title + (track.key == nil ? "" : " - \(track.key!)")
             titleLabel.textColor = nil
 
         } else {

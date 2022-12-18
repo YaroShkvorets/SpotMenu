@@ -69,6 +69,7 @@ class Spotify {
                 self.apiKey = response.access_token
                 self.apiKeyExpires = calendar.date(byAdding: .second, value: response.expires_in, to: Date())
                 print("API key acquired: \(self.apiKey!)")
+                self.getTrackKey()
                 
             } catch {
                 print("Failed to decode API key: \(error)")
@@ -125,6 +126,9 @@ class Spotify {
             do {
                 let audioAnalysis = try JSONDecoder().decode(AudioAnalysis.self, from: data!)
                 self.currentTrack?.key = getKeyFromAnalysis(audioAnalysis)
+                DispatchQueue.main.async {
+                    self.delegate?.player(self, didChangeTrack: self.currentTrack!, atPosition: self.playerPosition)
+                }
             } catch {
                 print("Failed to decode track analysis: \(error)")
             }
