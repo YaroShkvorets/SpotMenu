@@ -84,6 +84,18 @@ final class StatusItemBuilder {
         }
         return self
     }
+    
+    func showTrackKey(v: Bool) -> StatusItemBuilder {
+        if !v {
+            key = ""
+            return self
+        }
+        if !isPlaying && hideWhenPaused {
+            key = ""
+            return self
+        }
+        return self
+    }
 
     func showPlayingIcon(v: Bool) -> StatusItemBuilder {
         if !v {

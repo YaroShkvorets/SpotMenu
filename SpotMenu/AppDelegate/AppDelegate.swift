@@ -184,6 +184,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             .showTitle(v: true)
             .showAlbumName(v: true)
             .showArtist(v: true)
+            .showTrackKey(v: true)
             .showPlayingIcon(v: true)
             .getString())
 
@@ -217,6 +218,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             .showTitle(v: UserPreferences.showTitle)
             .showAlbumName(v: UserPreferences.showAlbumName)
             .showArtist(v: UserPreferences.showArtist)
+            .showTrackKey(v: UserPreferences.showArtist)
             .showPlayingIcon(v: UserPreferences.showPlayingIcon)
             .getString()
         if lastStatusTitle != statusItemTitle {
