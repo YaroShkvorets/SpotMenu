@@ -16,8 +16,8 @@ class Spotify {
     
     weak var delegate: MusicPlayerDelegate?
     
-    let SpotifyClientId = "e96db07a93e345499dcb9b11a2f86e29"
-    let SpotifyClientSecret = "6bea79da5d6b452f988f541cce226264"
+    let SpotifyClientId = "<CLIENT ID>"
+    let SpotifyClientSecret = "<CLIENT SECRET>"
     var apiKeyExpires: Date?
     var apiKey: String?
     
