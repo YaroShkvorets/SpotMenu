@@ -15,13 +15,14 @@ final class StatusItemBuilder {
     private var title = ""
     private var artist = ""
     private var albumName = ""
+    private var key = ""
     private var playingIcon = ""
     private var isPlaying: Bool = false
     private var hideWhenPaused = false
 
     // MARK: - Lifecycle method
 
-    init(title: String?, artist: String?, albumName: String?, isPlaying: Bool) {
+    init(title: String?, artist: String?, albumName: String?, key: String?, isPlaying: Bool) {
         if let v = title {
             self.title = v
         }
@@ -31,10 +32,17 @@ final class StatusItemBuilder {
         if let v = albumName {
             self.albumName = v
         }
+        if let v = key {
+            self.key = v
+        }
         self.isPlaying = isPlaying
     }
 
     // MARK: - Methods
+    
+    func setKey(newValue: String) {
+        self.key = newValue
+    }
 
     func hideWhenPaused(v: Bool) -> StatusItemBuilder {
         hideWhenPaused = v
@@ -91,11 +99,20 @@ final class StatusItemBuilder {
     }
 
     func getString() -> String {
-        if artist.count != 0 && title.count != 0 && albumName.count != 0 {
-            return "\(playingIcon)\(artist) - \(title) - \(albumName)"
-        } else if artist.count != 0 && title.count != 0 {
-            return "\(playingIcon)\(artist) - \(title)"
+        var res = "\(playingIcon)"
+        if artist.count != 0 {
+            res += artist
         }
-        return "\(playingIcon)\(artist)\(title)"
+        if title.count != 0 {
+            res += " - \(title)"
+        }
+        if albumName.count != 0 {
+            res += " - \(albumName)"
+        }
+        if key.count != 0 {
+            res += " - \(key)"
+        }
+        
+        return res
     }
 }

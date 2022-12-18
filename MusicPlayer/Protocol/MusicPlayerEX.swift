@@ -74,6 +74,7 @@ extension MusicPlayerEX {
               let newTrack = originalPlayerCurrentTrack,
               currentTrack == nil || currentTrack! != newTrack
         else { return }
+        
         currentTrack = newTrack
         delegate?.player(self, didChangeTrack: newTrack, atPosition: playerPosition)
     }

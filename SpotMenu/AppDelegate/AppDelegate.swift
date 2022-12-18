@@ -178,6 +178,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             title: musicPlayerManager.currentPlayer?.currentTrack?.title,
             artist: musicPlayerManager.currentPlayer?.currentTrack?.artist,
             albumName: musicPlayerManager.currentPlayer?.currentTrack?.album,
+            key: musicPlayerManager.currentPlayer?.currentTrack?.key,
             isPlaying: musicPlayerManager.currentPlayer?.playbackState == MusicPlaybackState.playing)
             .hideWhenPaused(v: false)
             .showTitle(v: true)
@@ -205,11 +206,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc func updateTitle() {
-
+        
         let statusItemTitle = StatusItemBuilder(
             title: musicPlayerManager.currentPlayer?.currentTrack?.title,
             artist: musicPlayerManager.currentPlayer?.currentTrack?.artist,
             albumName: musicPlayerManager.currentPlayer?.currentTrack?.album,
+            key: musicPlayerManager.currentPlayer?.currentTrack?.key,
             isPlaying: musicPlayerManager.currentPlayer?.playbackState == MusicPlaybackState.playing)
             .hideWhenPaused(v: UserPreferences.hideTitleArtistWhenPaused)
             .showTitle(v: UserPreferences.showTitle)
