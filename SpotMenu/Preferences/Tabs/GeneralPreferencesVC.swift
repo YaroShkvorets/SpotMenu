@@ -37,6 +37,8 @@ final class GeneralPreferencesVC: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initLabels()
+        NotificationCenter.default.addObserver(self, selector: #selector(spotifyClientIdTextChange), name: NSTextField.textDidChangeNotification, object: spotifyClientIdText)
+        NotificationCenter.default.addObserver(self, selector: #selector(spotifyClientSecretTextChange), name: NSTextField.textDidChangeNotification, object: spotifyClientSecretText)
     }
 
     override func viewWillAppear() {
@@ -46,6 +48,7 @@ final class GeneralPreferencesVC: NSViewController {
         initButtonHovers()
         NSApp.activate(ignoringOtherApps: true)
     }
+    
 
     private func initLabels() {
         showArtistButton.title = NSLocalizedString("Show artist", comment: "")
@@ -103,22 +106,33 @@ final class GeneralPreferencesVC: NSViewController {
 
         hideTextWhenPausedButton.mouseEnteredFunc = hoverHideTitleWhenPaused
         hideTextWhenPausedButton.mouseExitedFunc = hoverAway
+        
     }
 
+    
+    @objc func spotifyClientIdTextChange() {
+        UserPreferences.spotifyClientId = spotifyClientIdText.stringValue
+        let appDelegate = NSApplication.shared.delegate as! AppDelegate
+        appDelegate.setSecret(key: "spotifyClientId", value: UserPreferences.spotifyClientId)
+    }
+
+    @objc func spotifyClientSecretTextChange() {
+        UserPreferences.spotifyClientSecret = spotifyClientSecretText.stringValue
+        let appDelegate = NSApplication.shared.delegate as! AppDelegate
+        appDelegate.setSecret(key: "spotifyClientSecret", value: UserPreferences.spotifyClientSecret)
+    }
+
+    
     // MARK: - IBActions
 
     @IBAction private func toggleShowArtist(_: Any) {
         UserPreferences.showArtist = showArtistButton.state.asBool
     }
     @IBAction func editSpotifyClientId(_ sender: Any) {
-        UserPreferences.spotifyClientId = spotifyClientIdText.stringValue
-        let appDelegate = NSApplication.shared.delegate as! AppDelegate
-        appDelegate.setSecret(key: "spotifyClientId", value: UserPreferences.spotifyClientId)
+        moreInformation.stringValue = NSLocalizedString("Spotify Client ID is required to query Spotify Web API for song analysis. You can generate it in Spotify Developer portal: https://developer.spotify.com", comment: "")
     }
     @IBAction func editSpotifyClientSecret(_ sender: Any) {
-        UserPreferences.spotifyClientSecret = spotifyClientSecretText.stringValue
-        let appDelegate = NSApplication.shared.delegate as! AppDelegate
-        appDelegate.setSecret(key: "spotifyClientSecret", value: UserPreferences.spotifyClientSecret)
+        moreInformation.stringValue = NSLocalizedString("Spotify Client Secret is required to query Spotify Web API for song analysis. You can generate it in Spotify Developer portal: https://developer.spotify.com", comment: "")
     }
     
     @IBAction private func toggleShowTitle(_: Any) {
