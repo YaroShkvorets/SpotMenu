@@ -18,12 +18,12 @@ import MusicPlayer
 final class AppDelegate: NSObject, NSApplicationDelegate {
     private enum Constants {
         static let statusItemIconLength: CGFloat = 30
-        static let statusItemLengthBigSur: CGFloat = 220;
+        static let statusItemLengthBigSur: CGFloat = 270;
         static var statusItemLength: CGFloat {
             if #available(macOS 11.0, *) {
                 return Constants.statusItemLengthBigSur;
             } else {
-                return 250;
+                return 300;
             }
         }
     }
@@ -218,7 +218,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             .showTitle(v: UserPreferences.showTitle)
             .showAlbumName(v: UserPreferences.showAlbumName)
             .showArtist(v: UserPreferences.showArtist)
-            .showTrackKey(v: UserPreferences.showArtist)
+            .showTrackKey(v: UserPreferences.showTrackKey)
             .showPlayingIcon(v: UserPreferences.showPlayingIcon)
             .getString()
         if lastStatusTitle != statusItemTitle {

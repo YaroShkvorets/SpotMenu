@@ -18,6 +18,7 @@ struct UserPreferences {
         static let showArtist = "showArtist"
         static let showTitle = "showTitle"
         static let showAlbumName = "showAlbumName"
+        static let showTrackKey = "showTrackKey"
         static let showPlayingIcon = "showPlayingIcon"
         static let showSpotMenuIcon = "showSpotMenuIcon"
         static let fixPopoverToTheRight = "dropDownToTheRight"
@@ -53,6 +54,15 @@ struct UserPreferences {
         }
         set {
             UserPreferences.setSetting(key: Keys.showAlbumName, value: newValue)
+        }
+    }
+
+    static var showTrackKey: Bool {
+        get {
+            return UserPreferences.readSetting(key: Keys.showTrackKey)
+        }
+        set {
+            UserPreferences.setSetting(key: Keys.showTrackKey, value: newValue)
         }
     }
 
@@ -157,6 +167,7 @@ struct UserPreferences {
         if UserPreferences.showArtist ||
             UserPreferences.showTitle ||
             UserPreferences.showAlbumName ||
+            UserPreferences.showTrackKey ||
             UserPreferences.showPlayingIcon ||
             UserPreferences.showSpotMenuIcon ||
             UserPreferences.fixPopoverToTheRight ||
@@ -171,6 +182,7 @@ struct UserPreferences {
         UserPreferences.showArtist = true
         UserPreferences.showTitle = true
         UserPreferences.showAlbumName = true
+        UserPreferences.showTrackKey = true
         UserPreferences.showPlayingIcon = true
         UserPreferences.showSpotMenuIcon = true
         UserPreferences.keyboardShortcutEnabled = true
