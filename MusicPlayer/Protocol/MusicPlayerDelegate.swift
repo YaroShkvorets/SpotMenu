@@ -30,4 +30,6 @@ public protocol MusicPlayerDelegate: class {
     ///
     /// - Parameter player: The player which triggers this event.
     func playerDidQuit(_ player: MusicPlayer)
+    
+    func getSecret(_ key: String) -> String?
 }

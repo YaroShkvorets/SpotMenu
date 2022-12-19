@@ -8,10 +8,6 @@
 import Foundation
 import ScriptingBridge
 
-struct Secrets: Codable {
-    let client_id: String
-    let client_secret: String
-}
 
 class Spotify {
     
@@ -21,7 +17,7 @@ class Spotify {
     
     weak var delegate: MusicPlayerDelegate?
     
-    var spotifySecrets: Secrets?
+
     var apiKeyExpires: Date?
     var apiKey: String?
     
@@ -33,22 +29,10 @@ class Spotify {
         guard let player = SBApplication(bundleIdentifier: MusicPlayerName.spotify.bundleID) else { return nil }
         spotifyPlayer = player
         hashValue = Int(arc4random())
-        loadSecrets()
-        getApiKey()
     }
     
     deinit {
         stopPlayerTracking()
-    }
-    
-    func loadSecrets() {
-        let url = Bundle.main.url(forResource: "secrets", withExtension: "json")!
-        do {
-            let data = try Data(contentsOf: url)
-            spotifySecrets = try JSONDecoder().decode(Secrets.self, from: data)
-        } catch {
-            print("Failed to decode Secrets: \(error)")
-        }
     }
     
     func isApiKeyExpired() -> Bool {
@@ -64,8 +48,12 @@ class Spotify {
         let url = URL(string: urlString)
         var request = URLRequest(url: url!)
         request.httpMethod = "POST"
+        
+        let spotifyClientId = delegate?.getSecret("spotifyClientId")
+        let spotifyClientSecret = delegate?.getSecret("spotifyClientSecret")
+        if spotifyClientId == nil || spotifyClientSecret == nil { return }
 
-        let authorizationHeader = "\(spotifySecrets!.client_id):\(spotifySecrets!.client_secret)".data(using: .utf8)?.base64EncodedString() ?? ""
+        let authorizationHeader = "\(spotifyClientId!):\(spotifyClientSecret!)".data(using: .utf8)?.base64EncodedString() ?? ""
         request.setValue("Basic \(authorizationHeader)", forHTTPHeaderField: "Authorization")
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.httpBody = "grant_type=client_credentials".data(using: .utf8)
@@ -181,6 +169,7 @@ class Spotify {
 
         // write down the track start time
         rememberedTrackStateDate = trackStartDate
+        getApiKey()
     }
 }
 

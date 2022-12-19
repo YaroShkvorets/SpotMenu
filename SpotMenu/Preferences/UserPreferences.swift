@@ -26,6 +26,8 @@ struct UserPreferences {
         static let keyboardShortcutEnabled = "keyboardShortcutEnabled"
         static let hideTitleArtistWhenPaused = "hideTitleArtistWhenPaused"
         static let lastMusicPlayer = "lastMusicPlayer"
+        static let spotifyClientId = "spotifyClientId"
+        static let spotifyClientSecret = "spotifyClientSecret"
     }
 
     // MARK: - Properties
@@ -122,6 +124,25 @@ struct UserPreferences {
             UserPreferences.setSettingString(key: Keys.lastMusicPlayer, value: newValue)
         }
     }
+    
+    static var spotifyClientId: String {
+        get {
+            return UserPreferences.readSettingString(key: Keys.spotifyClientId) ?? ""
+        }
+        set {
+            UserPreferences.setSettingString(key: Keys.spotifyClientId, value: newValue)
+        }
+    }
+    
+    static var spotifyClientSecret: String {
+        get {
+            return UserPreferences.readSettingString(key: Keys.spotifyClientSecret) ?? ""
+        }
+        set {
+            UserPreferences.setSettingString(key: Keys.spotifyClientSecret, value: newValue)
+        }
+    }
+    
 
     // MARK: - Public methods
 

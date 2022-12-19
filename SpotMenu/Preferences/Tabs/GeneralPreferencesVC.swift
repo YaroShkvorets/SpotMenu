@@ -29,7 +29,9 @@ final class GeneralPreferencesVC: NSViewController {
     @IBOutlet fileprivate var hideTextWhenPausedButton: HoverButton!
     @IBOutlet fileprivate var moreInformation: NSTextField!
     @IBOutlet private var withLoveFromKmikiyText: NSTextField!
-
+    @IBOutlet private var spotifyClientIdText: NSTextField!
+    @IBOutlet private var spotifyClientSecretText: NSTextField!
+    
     // MARK: - Lifecycle methods
 
     override func viewDidLoad() {
@@ -70,6 +72,8 @@ final class GeneralPreferencesVC: NSViewController {
         openAtLoginButton.state = NSControl.StateValue(rawValue: applicationIsInStartUpItems().asState)
         enableKeyboardShortcutButton.state = NSControl.StateValue(rawValue: UserPreferences.keyboardShortcutEnabled.asState)
         hideTextWhenPausedButton.state = NSControl.StateValue(rawValue: UserPreferences.hideTitleArtistWhenPaused.asState)
+        spotifyClientIdText.stringValue = UserPreferences.spotifyClientId
+        spotifyClientSecretText.stringValue = UserPreferences.spotifyClientSecret
     }
 
     private func initButtonHovers() {
@@ -99,9 +103,6 @@ final class GeneralPreferencesVC: NSViewController {
 
         hideTextWhenPausedButton.mouseEnteredFunc = hoverHideTitleWhenPaused
         hideTextWhenPausedButton.mouseExitedFunc = hoverAway
-
-        enableKeyboardShortcutButton.mouseEnteredFunc = hoverEnableKeyboardShortcut
-        enableKeyboardShortcutButton.mouseExitedFunc = hoverAway
     }
 
     // MARK: - IBActions
@@ -109,7 +110,17 @@ final class GeneralPreferencesVC: NSViewController {
     @IBAction private func toggleShowArtist(_: Any) {
         UserPreferences.showArtist = showArtistButton.state.asBool
     }
-
+    @IBAction func editSpotifyClientId(_ sender: Any) {
+        UserPreferences.spotifyClientId = spotifyClientIdText.stringValue
+        let appDelegate = NSApplication.shared.delegate as! AppDelegate
+        appDelegate.setSecret(key: "spotifyClientId", value: UserPreferences.spotifyClientId)
+    }
+    @IBAction func editSpotifyClientSecret(_ sender: Any) {
+        UserPreferences.spotifyClientSecret = spotifyClientSecretText.stringValue
+        let appDelegate = NSApplication.shared.delegate as! AppDelegate
+        appDelegate.setSecret(key: "spotifyClientSecret", value: UserPreferences.spotifyClientSecret)
+    }
+    
     @IBAction private func toggleShowTitle(_: Any) {
         UserPreferences.showTitle = showTitleButton.state.asBool
     }

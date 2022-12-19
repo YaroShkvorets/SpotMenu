@@ -16,6 +16,8 @@ public class MusicPlayerManager {
     public weak var currentPlayer: MusicPlayer?
     
     public init() {}
+
+    private var secrets = [String: String]()
 }
 
 // MARK: - Public Manager Methods
@@ -39,6 +41,10 @@ public extension MusicPlayerManager {
             }
         }
         return nil
+    }
+    
+    public func setSecret(key: String, value: String) {
+        self.secrets[key] = value
     }
     
     /// Add a music player to the manager.
@@ -132,6 +138,10 @@ extension MusicPlayerManager: MusicPlayerDelegate {
         selectMusicPlayerFromList()
     }
     
+    public func getSecret(_ key: String) -> String? {
+        return secrets[key]
+    }
+    
     fileprivate func selectMusicPlayerFromList() {
         for player in musicPlayers {
             selectMusicPlayer(with: player)
@@ -162,5 +172,6 @@ extension MusicPlayerManager: MusicPlayerDelegate {
             return true
         }
     }
+    
 }
 

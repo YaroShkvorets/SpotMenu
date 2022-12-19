@@ -73,13 +73,19 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     // MARK: - AppDelegate methods
+    
+    func setSecret(key: String, value: String) {
+        musicPlayerManager.setSecret(key: key, value: value)
+    }
 
     func applicationDidFinishLaunching(_: Notification) {
         // Fabric.with([Crashlytics.self])
         
         UserPreferences.initializeUserPreferences()
-
+        
         musicPlayerManager = MusicPlayerManager()
+        setSecret(key: "spotifyClientId", value: UserPreferences.spotifyClientId)
+        setSecret(key: "spotifyClientSecret", value: UserPreferences.spotifyClientSecret)
         musicPlayerManager.add(musicPlayer: .spotify)
         musicPlayerManager.add(musicPlayer: .iTunes)
 
